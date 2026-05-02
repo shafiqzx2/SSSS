@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>স্বপ্ন ছোঁয়া সমবায় সমিতি - হিসাব</title>
+  <meta name="description" content="স্বপ্ন ছোঁয়া সমবায় সমিতির সদস্য হিসাব" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+  <style>
+    :root{
+      --bg:#edf3f8;
+      --card:#ffffff;
+      --ink:#071a33;
+      --muted:#5b697b;
+      --green:#057c6b;
+      --green-dark:#03594d;
+      --green-soft:#dff5ef;
+      --red:#df1d2d;
+      --border:#d6dee8;
+      --pink:#d49abb;
+      --shadow:0 12px 30px rgba(14,30,55,.10);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family:'Noto Serif Bengali', serif;
+      font-weight:600;
+    }
+    .page{
+      width:min(1188px,100%);
+      margin:0 auto;
+      padding:10px 10px 30px;
+    }
+    .top-card{
+      background:var(--card);
+      border-radius:0 0 22px 22px;
+      box-shadow:var(--shadow);
+      text-align:center;
+      padding:14px 12px 16px;
+      overflow:hidden;
+    }
+    .bismillah{font-size:16px; line-height:1.25; border-bottom:2px dotted #777; display:inline-block; padding:0 22px 3px;}
+    .slogan{display:flex; align-items:center; justify-content:center; gap:72px; font-size:17px; margin-top:4px;}
+    .title{font-size:34px; line-height:1.05; font-weight:800; margin-top:2px;}
+    .address{font-size:18px; line-height:1.25;}
+    .est{font-size:14px; border-bottom:2px dotted #777; display:inline-block; min-width:500px; padding-bottom:2px;}
+    .period{font-size:20px; border-top:2px dotted #777; border-bottom:2px dotted #777; display:inline-block; padding:1px 20px; margin-top:6px;}
+
+    .notice-wrap{
+      background:#fff;
+      border:1px solid #ffb8b8;
+      border-radius:12px;
+      margin:14px 0;
+      overflow:hidden;
+      height:48px;
+      display:flex;
+      align-items:center;
+    }
+    .notice-track{
+      white-space:nowrap;
+      color:var(--red);
+      font-size:20px;
+      font-weight:800;
+      animation:rtlMove 22s linear infinite;
+      padding-left:100%;
+    }
+    @keyframes rtlMove{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+
+    .controls{
+      background:#fff;
+      border-radius:16px;
+      box-shadow:var(--shadow);
+      padding:12px;
+      display:grid;
+      grid-template-columns:auto auto 1fr;
+      gap:10px;
+      align-items:center;
+      margin-bottom:14px;
+    }
+    .btn, select{
+      border:0;
+      border-radius:12px;
+      padding:12px 16px;
+      min-height:44px;
+      font-family:inherit;
+      font-size:15px;
+      font-weight:800;
+    }
+    .btn{cursor:pointer; background:#e6ebf2; color:#06172c; transition:.2s ease;}
+    .btn.active,.btn.primary{background:var(--green); color:#fff;}
+    .btn:hover{transform:translateY(-1px)}
+    select{
+      border:1px solid #cbd5e1;
+      background:#fff;
+      width:min(360px,100%);
+      justify-self:end;
+      color:#06172c;
+    }
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin:0 0 14px;
+    }
+    .stat{
+      background:#f8fbff;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 10px;
+      text-align:center;
+      box-shadow:0 4px 12px rgba(15,23,42,.04);
+    }
+    .stat span{display:block; font-size:18px; line-height:1.15; font-weight:600;}
+    .stat b{display:block; color:var(--green-dark); font-size:24px; line-height:1.05; font-weight:800;}
+
+    .panel{
+      background:#fff;
+      border-radius:16px;
+      box-shadow:var(--shadow);
+      padding:14px;
+      overflow:hidden;
+    }
+    .hidden{display:none!important}
+    .table-scroll{overflow:auto; border-radius:14px; border:1px solid #555; background:#fff; -webkit-overflow-scrolling:touch;}
+    table{width:100%; min-width:1040px; border-collapse:collapse; background:#fff;}
+    th,td{border:1px solid #606060; padding:8px 8px; text-align:center; vertical-align:middle; font-size:15px; line-height:1.25;}
+    th{background:#f4f5f7; font-weight:800;}
+    td.name{text-align:left; font-weight:800; white-space:nowrap;}
+    td.status{font-weight:800; white-space:nowrap;}
+    .pink{background:var(--pink)!important;}
+    tr.selected-row td{background:var(--green-soft)!important; color:#052c26; border-top:2px solid var(--green); border-bottom:2px solid var(--green);}
+    tr.selected-row td:first-child{border-left:3px solid var(--green);}
+    tr.selected-row td:last-child{border-right:3px solid var(--green);}
+    tr.selected-row td.name::before{content:'✓ '; color:var(--green); font-weight:900;}
+
+    .personal-wrap{display:grid; gap:14px;}
+    .personal-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:18px;
+      overflow:hidden;
+    }
+    .capture-area{background:#fff; padding:18px;}
+    .capture-head{text-align:center; border-bottom:2px solid var(--green); padding-bottom:10px; margin-bottom:14px;}
+    .capture-head .org{font-size:28px; font-weight:800; line-height:1.05;}
+    .capture-head .addr{font-size:16px; margin-top:2px;}
+    .capture-head .pname{font-size:22px; color:var(--green-dark); font-weight:800; margin-top:10px;}
+    .detail-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:10px;}
+    .detail-item{border:1px solid var(--border); border-radius:14px; padding:12px; background:#f9fbff; min-height:74px;}
+    .detail-item label{display:block; color:var(--muted); font-size:14px; margin-bottom:5px;}
+    .detail-item strong{font-size:20px; line-height:1.15; word-break:break-word;}
+    .detail-item.full{grid-column:1/-1; background:var(--green-soft); border-color:#9fd6ca;}
+    .fine-row{display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-top:12px;}
+    .fine-box{border:1px solid #cbd5e1; border-radius:12px; padding:10px 6px; text-align:center; background:#fff;}
+    .fine-box span{display:block; color:var(--muted); font-size:13px;}
+    .fine-box b{display:block; font-size:18px; margin-top:2px;}
+    .save-area{display:flex; justify-content:center; gap:10px; padding:14px 10px 4px; flex-wrap:wrap;}
+    .save-note{font-size:13px; color:#64748b; text-align:center; width:100%; margin:0;}
+
+    .mobile-cards{display:none; gap:10px;}
+    .m-card{background:#fff; border:1px solid var(--border); border-radius:15px; padding:12px; box-shadow:0 5px 15px rgba(15,23,42,.06);}
+    .m-card.selected{border:2px solid var(--green); background:var(--green-soft);}
+    .m-head{display:flex; justify-content:space-between; gap:8px; border-bottom:1px dashed #cbd5e1; padding-bottom:8px; margin-bottom:8px;}
+    .m-name{font-size:17px; font-weight:800; color:#06172c;}
+    .m-no{background:var(--green); color:#fff; border-radius:999px; padding:4px 10px; height:max-content; white-space:nowrap; font-weight:800;}
+    .m-grid{display:grid; grid-template-columns:1fr 1fr; gap:7px;}
+    .m-grid div{background:#f8fafc; border-radius:10px; padding:7px; font-size:13px;}
+    .m-grid b{display:block; font-size:15px; margin-top:2px;}
+
+    @media(max-width:760px){
+      .page{padding:0 7px 18px;}
+      .top-card{padding:10px 7px 12px; border-radius:0 0 18px 18px;}
+      .bismillah{font-size:12px; padding:0 12px 2px;}
+      .slogan{gap:24px; font-size:12px; margin-top:2px;}
+      .title{font-size:24px;}
+      .address{font-size:13px;}
+      .est{font-size:12px; min-width:260px;}
+      .period{font-size:14px; padding:2px 8px;}
+      .notice-wrap{height:42px; margin:10px 0; border-radius:10px;}
+      .notice-track{font-size:15px; animation-duration:18s;}
+      .controls{grid-template-columns:1fr 1fr; gap:8px; padding:10px; position:sticky; top:0; z-index:10; border-radius:13px;}
+      .controls select{grid-column:1/-1; justify-self:stretch; width:100%; order:3; font-size:14px; padding:10px 12px;}
+      .btn{font-size:14px; padding:10px 8px; width:100%;}
+      .stats{grid-template-columns:1fr 1fr; gap:8px;}
+      .stat{padding:10px 6px;}
+      .stat span{font-size:14px;}
+      .stat b{font-size:19px;}
+      .panel{padding:10px; border-radius:13px;}
+      .table-scroll{display:none;}
+      .mobile-cards{display:grid;}
+      .capture-area{padding:12px;}
+      .capture-head .org{font-size:22px;}
+      .capture-head .addr{font-size:13px;}
+      .capture-head .pname{font-size:19px;}
+      .detail-grid{grid-template-columns:1fr; gap:8px;}
+      .detail-item{min-height:auto; padding:10px;}
+      .detail-item label{font-size:13px;}
+      .detail-item strong{font-size:17px;}
+      .fine-row{grid-template-columns:1fr 1fr; gap:7px;}
+      .fine-box:last-child{grid-column:1/-1;}
+    }
+
+    @media print{
+      body{background:#fff;}
+      .controls,.notice-wrap,.stats,.save-area,.mobile-cards{display:none!important;}
+      .page{width:100%; padding:0;}
+      .top-card,.panel{box-shadow:none; border-radius:0;}
+      .table-scroll{display:block; overflow:visible; border:0;}
+      table{min-width:0;}
+      th,td{font-size:10px; padding:4px;}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="top-card">
+      <div class="bismillah">বিসমিল্লাহির রাহমানির রাহীম</div>
+      <div class="slogan"><span>একতা</span><span>শৃঙ্খলা</span><span>উন্নয়ন</span></div>
+      <div class="title">স্বপ্ন ছোঁয়া সমবায় সমিতি</div>
+      <div class="address">মডেরহাট, ডামুড্যা, শরীয়তপুর</div>
+      <div class="est">স্থাপিতঃ ২০২২</div><br>
+      <div class="period">2022 to 2 May 2026 (Include Month: May 26)</div>
+    </header>
+
+    <section class="notice-wrap" aria-label="notice">
+      <div class="notice-track">(এখনে 2026(JAN, FEB, MARCH) জরিমানার টাকা মূল টাকা থেকে কাটা হয়েছে। April 26 জরিমানার টাকা may 10 তারিখের পর বকেয়া 2000 টাকার বেশি থাকলে কাটা হবে, অন্যথায় না।)</div>
+    </section>
+
+    <section class="controls">
+      <button id="allBtn" class="btn active" type="button">All সদস্য হিসাব</button>
+      <button id="personalBtn" class="btn" type="button">ব্যক্তিগত হিসাব</button>
+      <select id="memberSelect" aria-label="সদস্য নির্বাচন"></select>
+    </section>
+
+    <section id="allPanel" class="panel">
+      <div class="stats" id="stats"></div>
+      <div class="table-scroll">
+        <table id="allTable">
+          <thead>
+            <tr>
+              <th colspan="4"></th>
+              <th colspan="4">জরিমানা JAN, FEB, MARCH (Paid/Unpaid)</th>
+              <th class="pink">জরিমানা</th>
+              <th>Unpaid</th>
+              <th>PAID</th>
+            </tr>
+            <tr>
+              <th>সদস্য<br>নং</th>
+              <th>নাম</th>
+              <th>বকেয়া/বেশি</th>
+              <th>জমা</th>
+              <th>JAN</th>
+              <th>FEB</th>
+              <th>MARCH</th>
+              <th>মোট</th>
+              <th class="pink">APRIL<br>&lt;=&gt;10 May</th>
+              <th>জরিমানা<br>2025</th>
+              <th>জরিমানা<br>(2022-24)</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+      <div class="mobile-cards" id="mobileCards"></div>
+    </section>
+
+    <section id="personalPanel" class="panel hidden">
+      <div class="personal-wrap">
+        <div class="personal-card" id="personalCapture">
+          <div class="capture-area">
+            <div class="capture-head">
+              <div class="org">স্বপ্ন ছোঁয়া সমবায় সমিতি</div>
+              <div class="addr">মডেরহাট, ডামুড্যা, শরীয়তপুর</div>
+              <div class="period" style="font-size:14px;margin-top:8px;">2022 to 2 May 2026 (Include Month: May 26)</div>
+              <div class="pname" id="personalName"></div>
+            </div>
+
+            <div class="detail-grid">
+              <div class="detail-item"><label>সদস্য নং</label><strong id="pNo"></strong></div>
+              <div class="detail-item"><label>জমা</label><strong id="pDeposit"></strong></div>
+              <div class="detail-item"><label>বকেয়া/বেশি</label><strong id="pBalance"></strong></div>
+              <div class="detail-item"><label>জরিমানা 2025</label><strong id="pFine2025"></strong></div>
+              <div class="detail-item"><label>জরিমানা (2022-24)</label><strong id="pOldFine"></strong></div>
+              <div class="detail-item"><label>APRIL &lt;=&gt;10 May জরিমানা</label><strong id="pApril"></strong></div>
+              <div class="detail-item full"><label>JAN, FEB, MARCH মোট জরিমানা</label><strong id="pTotal"></strong></div>
+            </div>
+
+            <div class="fine-row">
+              <div class="fine-box"><span>JAN</span><b id="pJan"></b></div>
+              <div class="fine-box"><span>FEB</span><b id="pFeb"></b></div>
+              <div class="fine-box"><span>MARCH</span><b id="pMar"></b></div>
+              <div class="fine-box"><span>মোট</span><b id="pTotal2"></b></div>
+              <div class="fine-box"><span>স্ট্যাটাস</span><b id="pStatus"></b></div>
+            </div>
+          </div>
+        </div>
+        <div class="save-area">
+          <button id="saveJpgBtn" class="btn primary" type="button">JPG Save করুন</button>
+          <p class="save-note">Save চাপলে শুধু ব্যক্তিগত হিসাব JPG ছবি হিসেবে save হবে।</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const members = [
+      {no:1,name:'মোঃ ইয়াছিন মিয়া',balance:'',deposit:65000,jan:0,feb:0,mar:0,april:0,fine2025:'প্রক্রিয়াধীন',oldFine:300},
+      {no:2,name:'মোঃ আল-আমিন মাদবর',balance:'বকেয়া: 4000',deposit:61000,jan:0,feb:0,mar:0,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:0},
+      {no:3,name:'মোঃ ফরহাদ হোসেন',balance:'বকেয়া: 4000',deposit:61000,jan:0,feb:0,mar:0,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:200},
+      {no:5,name:'মোঃ রুবেল মিয়া',balance:'বকেয়া: 2000',deposit:63000,jan:0,feb:0,mar:0,april:0,fine2025:'প্রক্রিয়াধীন',oldFine:0},
+      {no:6,name:'মোঃ ওমর ফারুক',balance:'বকেয়া: 4100',deposit:60900,jan:0,feb:0,mar:0,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:600},
+      {no:7,name:'এনামুল হক(ফয়সাল)',balance:'বকেয়া: 4300',deposit:60700,jan:0,feb:0,mar:0,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:300},
+      {no:8,name:'আরমান উদ্দিন ইয়ামিন',balance:'বকেয়া: 4000',deposit:61000,jan:0,feb:0,mar:0,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:0},
+      {no:9,name:'মোঃ আলি আকবর মাদবর',balance:'বকেয়া: 2000',deposit:63000,jan:0,feb:0,mar:0,april:0,fine2025:'প্রক্রিয়াধীন',oldFine:100},
+      {no:10,name:'শরিফুল ইসলাম (শরিফ)',balance:'বকেয়া: 4200',deposit:60800,jan:200,feb:0,mar:0,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:400},
+      {no:11,name:'মোঃ আলি-আজম মাদবর',balance:'বকেয়া: 1600',deposit:63400,jan:0,feb:0,mar:0,april:0,fine2025:'প্রক্রিয়াধীন',oldFine:500},
+      {no:13,name:'মোঃ রাকিব মাদবর',balance:'বকেয়া: 4000',deposit:61000,jan:0,feb:0,mar:0,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:500},
+      {no:14,name:'মোঃ দাদান হাওলাদার',balance:'বকেয়া: 4400',deposit:60600,jan:200,feb:200,mar:0,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:1400},
+      {no:16,name:'মোঃ সফিক মাদবর',balance:'বকেয়া: 4000',deposit:61000,jan:0,feb:0,mar:0,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:0},
+      {no:17,name:'মোঃ শাহিন মাদবর',balance:'বকেয়া: 4000',deposit:61000,jan:0,feb:0,mar:0,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:0},
+      {no:18,name:'মোঃ আলমগির হাওলাদার',balance:'বকেয়া: 4400',deposit:60600,jan:200,feb:200,mar:0,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:500},
+      {no:19,name:'মোঃ আওলাদ মালত',balance:'বেশি: 3000',deposit:68000,jan:0,feb:0,mar:0,april:0,fine2025:'প্রক্রিয়াধীন',oldFine:0},
+      {no:20,name:'মোঃ মানিক বেপারী',balance:'বকেয়া: 8100',deposit:56900,jan:0,feb:200,mar:200,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:1600},
+      {no:21,name:'মোঃ সোহেল আরমান',balance:'বকেয়া: 2000',deposit:63000,jan:0,feb:0,mar:0,april:0,fine2025:'প্রক্রিয়াধীন',oldFine:0},
+      {no:22,name:'রানা মোল্লা(রুবেল)',balance:'বকেয়া: 6400',deposit:58600,jan:200,feb:0,mar:200,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:100},
+      {no:23,name:'চাঁন মিয়া',balance:'বকেয়া: 2000',deposit:63000,jan:0,feb:0,mar:0,april:0,fine2025:'প্রক্রিয়াধীন',oldFine:200},
+      {no:24,name:'মোঃ আনোয়ার হোসেন',balance:'বকেয়া: 2200',deposit:62800,jan:0,feb:200,mar:0,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:100},
+      {no:25,name:'মোঃ নাজমুল হক',balance:'',deposit:65000,jan:0,feb:0,mar:0,april:0,fine2025:'প্রক্রিয়াধীন',oldFine:0},
+      {no:26,name:'রুবেল হাওলাদার',balance:'বকেয়া: 4400',deposit:60600,jan:200,feb:200,mar:0,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:300},
+      {no:27,name:'আজাদ মাদবর',balance:'বকেয়া: 4400',deposit:60600,jan:200,feb:200,mar:0,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:0},
+      {no:28,name:'শরীয়তউল্লাহ',balance:'বকেয়া: 4000',deposit:61000,jan:0,feb:0,mar:0,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:200},
+      {no:29,name:'আজিজুল',balance:'বকেয়া: 2000',deposit:63000,jan:0,feb:0,mar:0,april:0,fine2025:'প্রক্রিয়াধীন',oldFine:0},
+      {no:30,name:'সোহেল',balance:'বেশি: 1000',deposit:66000,jan:0,feb:0,mar:0,april:0,fine2025:'প্রক্রিয়াধীন',oldFine:800},
+      {no:31,name:'রায়হান',balance:'বকেয়া: 4600',deposit:60400,jan:200,feb:200,mar:200,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:1300},
+      {no:32,name:'সপন',balance:'বকেয়া: 2600',deposit:62400,jan:200,feb:200,mar:200,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:900},
+      {no:34,name:'আনিস',balance:'বকেয়া: 2000',deposit:63000,jan:0,feb:0,mar:0,april:0,fine2025:'প্রক্রিয়াধীন',oldFine:900},
+      {no:35,name:'মোকলেস',balance:'বকেয়া: 2000',deposit:63000,jan:0,feb:0,mar:0,april:0,fine2025:'প্রক্রিয়াধীন',oldFine:1800},
+      {no:36,name:'ইউসুফ',balance:'বকেয়া: 6600',deposit:58400,jan:200,feb:200,mar:200,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:1800},
+      {no:37,name:'বাবলু হাঃ',balance:'বেশি: 1800',deposit:66800,jan:0,feb:200,mar:0,april:0,fine2025:'প্রক্রিয়াধীন',oldFine:''},
+      {no:38,name:'পারভেজ মাঃ',balance:'বকেয়া: 4000',deposit:61000,jan:200,feb:0,mar:0,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:''},
+      {no:39,name:'আবদুল্লাহ আয়ান',balance:'বকেয়া: 2000',deposit:63000,jan:0,feb:0,mar:0,april:0,fine2025:'প্রক্রিয়াধীন',oldFine:''},
+      {no:40,name:'আব্দুল্লাহ জিহাদ',balance:'বকেয়া: 2000',deposit:63000,jan:0,feb:0,mar:0,april:0,fine2025:'প্রক্রিয়াধীন',oldFine:''},
+      {no:41,name:'জহির',balance:'বকেয়া: 6200',deposit:58800,jan:0,feb:0,mar:200,april:200,fine2025:'প্রক্রিয়াধীন',oldFine:''}
+    ];
+
+    const $ = id => document.getElementById(id);
+    const totalFine = m => Number(m.jan||0) + Number(m.feb||0) + Number(m.mar||0);
+    const fmt = v => (v === '' || v === null || v === undefined) ? '' : String(v);
+
+    function buildSelect(){
+      $('memberSelect').innerHTML = members.map(m => `<option value="${m.no}">${m.no} - ${m.name}</option>`).join('');
+    }
+
+    function buildStats(){
+      const totalDeposit = members.reduce((s,m)=>s+Number(m.deposit||0),0);
+      const fines = members.reduce((s,m)=>s+totalFine(m),0);
+      const dueCount = members.filter(m => m.balance.includes('বকেয়া')).length;
+      $('stats').innerHTML = `
+        <div class="stat"><span>মোট সদস্য</span><b>${members.length}</b></div>
+        <div class="stat"><span>মোট জমা</span><b>${totalDeposit}</b></div>
+        <div class="stat"><span>JAN-MARCH মোট জরিমানা</span><b>${fines}</b></div>
+        <div class="stat"><span>বকেয়া সদস্য</span><b>${dueCount}</b></div>
+      `;
+    }
+
+    function buildTable(){
+      $('tableBody').innerHTML = members.map(m => `
+        <tr data-no="${m.no}">
+          <td>${m.no}</td>
+          <td class="name">${m.name}</td>
+          <td class="status">${m.balance}</td>
+          <td>${m.deposit}</td>
+          <td>${fmt(m.jan)}</td>
+          <td>${fmt(m.feb)}</td>
+          <td>${fmt(m.mar)}</td>
+          <td><b>${totalFine(m)}</b></td>
+          <td class="pink"><b>${fmt(m.april)}</b></td>
+          <td>${m.fine2025}</td>
+          <td><b>${fmt(m.oldFine)}</b></td>
+        </tr>
+      `).join('');
+    }
+
+    function buildMobileCards(){
+      $('mobileCards').innerHTML = members.map(m => `
+        <article class="m-card" data-no="${m.no}">
+          <div class="m-head"><div class="m-name">${m.name}</div><div class="m-no">নং ${m.no}</div></div>
+          <div class="m-grid">
+            <div>বকেয়া/বেশি<b>${m.balance || '-'}</b></div>
+            <div>জমা<b>${m.deposit}</b></div>
+            <div>JAN<b>${fmt(m.jan) || 0}</b></div>
+            <div>FEB<b>${fmt(m.feb) || 0}</b></div>
+            <div>MARCH<b>${fmt(m.mar) || 0}</b></div>
+            <div>মোট<b>${totalFine(m)}</b></div>
+            <div>APRIL<b>${fmt(m.april) || 0}</b></div>
+            <div>2022-24 জরিমানা<b>${fmt(m.oldFine) || '-'}</b></div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function getSelected(){
+      const no = Number($('memberSelect').value) || members[0].no;
+      return members.find(m => m.no === no) || members[0];
+    }
+
+    function highlightSelected(){
+      const selected = getSelected();
+      document.querySelectorAll('tr[data-no]').forEach(tr => tr.classList.toggle('selected-row', Number(tr.dataset.no) === selected.no));
+      document.querySelectorAll('.m-card[data-no]').forEach(card => card.classList.toggle('selected', Number(card.dataset.no) === selected.no));
+      const row = document.querySelector(`tr[data-no="${selected.no}"]`);
+      const card = document.querySelector(`.m-card[data-no="${selected.no}"]`);
+      if(!$('allPanel').classList.contains('hidden')){
+        if(window.innerWidth <= 760 && card) card.scrollIntoView({behavior:'smooth', block:'center'});
+        if(window.innerWidth > 760 && row) row.scrollIntoView({behavior:'smooth', block:'center'});
+      }
+    }
+
+    function renderPersonal(){
+      const m = getSelected();
+      $('personalName').textContent = `${m.name} - ব্যক্তিগত হিসাব`;
+      $('pNo').textContent = m.no;
+      $('pDeposit').textContent = m.deposit;
+      $('pBalance').textContent = m.balance || '-';
+      $('pFine2025').textContent = m.fine2025 || '-';
+      $('pOldFine').textContent = fmt(m.oldFine) || '-';
+      $('pApril').textContent = fmt(m.april) || 0;
+      $('pJan').textContent = fmt(m.jan) || 0;
+      $('pFeb').textContent = fmt(m.feb) || 0;
+      $('pMar').textContent = fmt(m.mar) || 0;
+      $('pTotal').textContent = totalFine(m);
+      $('pTotal2').textContent = totalFine(m);
+      $('pStatus').textContent = m.fine2025 || '-';
+      highlightSelected();
+    }
+
+    function showPanel(panel){
+      const personal = panel === 'personal';
+      $('allPanel').classList.toggle('hidden', personal);
+      $('personalPanel').classList.toggle('hidden', !personal);
+      $('allBtn').classList.toggle('active', !personal);
+      $('personalBtn').classList.toggle('active', personal);
+      renderPersonal();
+    }
+
+    async function savePersonalAsJpg(){
+      const btn = $('saveJpgBtn');
+      const m = getSelected();
+      btn.disabled = true;
+      btn.textContent = 'Saving...';
+      try{
+        const node = $('personalCapture');
+        const canvas = await html2canvas(node, {
+          backgroundColor:'#ffffff',
+          scale: Math.min(3, window.devicePixelRatio || 2),
+          useCORS:true,
+          logging:false
+        });
+        const link = document.createElement('a');
+        const safeName = m.name.replace(/[\\/:*?"<>|\s]+/g, '_');
+        link.download = `সদস্য_${m.no}_${safeName}_হিসাব.jpg`;
+        link.href = canvas.toDataURL('image/jpeg', 0.95);
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      }catch(err){
+        alert('JPG save হয়নি। আবার চেষ্টা করুন বা browser updated আছে কিনা দেখুন।');
+      }finally{
+        btn.disabled = false;
+        btn.textContent = 'JPG Save করুন';
+      }
+    }
+
+    buildSelect();
+    buildStats();
+    buildTable();
+    buildMobileCards();
+    renderPersonal();
+
+    $('allBtn').addEventListener('click', () => showPanel('all'));
+    $('personalBtn').addEventListener('click', () => showPanel('personal'));
+    $('memberSelect').addEventListener('change', () => renderPersonal());
+    $('saveJpgBtn').addEventListener('click', savePersonalAsJpg);
+  </script>
+</body>
+</html>
