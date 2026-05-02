@@ -366,7 +366,6 @@
       const dueCount = members.filter(m => m.balance.includes('বকেয়া')).length;
       $('stats').innerHTML = `
         <div class="stat"><span>মোট সদস্য</span><b>${members.length}</b></div>
-        <div class="stat"><span>মোট জমা</span><b>${totalDeposit}</b></div>
         <div class="stat"><span>JAN-MARCH মোট জরিমানা</span><b>${fines}</b></div>
         <div class="stat"><span>বকেয়া সদস্য</span><b>${dueCount}</b></div>
       `;
