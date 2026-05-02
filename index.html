@@ -244,7 +244,7 @@
         <table id="allTable">
           <thead>
             <tr>
-              <th colspan="4"></th>
+              <th colspan="5"></th>
               <th colspan="4">জরিমানা JAN, FEB, MARCH (Paid/Unpaid)</th>
               <th class="pink">জরিমানা</th>
               <th>Unpaid</th>
@@ -255,6 +255,7 @@
               <th>নাম</th>
               <th>বকেয়া/বেশি</th>
               <th>জমা</th>
+              <th>অতিরিক্ত<br>টাকা</th>
               <th>JAN</th>
               <th>FEB</th>
               <th>MARCH</th>
@@ -284,6 +285,7 @@
             <div class="detail-grid">
               <div class="detail-item"><label>সদস্য নং</label><strong id="pNo"></strong></div>
               <div class="detail-item"><label>জমা</label><strong id="pDeposit"></strong></div>
+              <div class="detail-item"><label>অতিরিক্ত টাকা</label><strong id="pExtra"></strong></div>
               <div class="detail-item"><label>বকেয়া/বেশি</label><strong id="pBalance"></strong></div>
               <div class="detail-item"><label>জরিমানা 2025</label><strong id="pFine2025"></strong></div>
               <div class="detail-item"><label>জরিমানা (2022-24)</label><strong id="pOldFine"></strong></div>
@@ -352,6 +354,7 @@
     const $ = id => document.getElementById(id);
     const totalFine = m => Number(m.jan||0) + Number(m.feb||0) + Number(m.mar||0);
     const fmt = v => (v === '' || v === null || v === undefined) ? '' : String(v);
+    const extraTk = 5000;
 
     function buildSelect(){
       $('memberSelect').innerHTML = members.map(m => `<option value="${m.no}">${m.no} - ${m.name}</option>`).join('');
@@ -376,6 +379,7 @@
           <td class="name">${m.name}</td>
           <td class="status">${m.balance}</td>
           <td>${m.deposit}</td>
+          <td><b>${extraTk}</b></td>
           <td>${fmt(m.jan)}</td>
           <td>${fmt(m.feb)}</td>
           <td>${fmt(m.mar)}</td>
@@ -394,6 +398,7 @@
           <div class="m-grid">
             <div>বকেয়া/বেশি<b>${m.balance || '-'}</b></div>
             <div>জমা<b>${m.deposit}</b></div>
+            <div>অতিরিক্ত টাকা<b>${extraTk}</b></div>
             <div>JAN<b>${fmt(m.jan) || 0}</b></div>
             <div>FEB<b>${fmt(m.feb) || 0}</b></div>
             <div>MARCH<b>${fmt(m.mar) || 0}</b></div>
@@ -427,6 +432,7 @@
       $('personalName').textContent = `${m.name} - ব্যক্তিগত হিসাব`;
       $('pNo').textContent = m.no;
       $('pDeposit').textContent = m.deposit;
+      $('pExtra').textContent = extraTk;
       $('pBalance').textContent = m.balance || '-';
       $('pFine2025').textContent = m.fine2025 || '-';
       $('pOldFine').textContent = fmt(m.oldFine) || '-';
