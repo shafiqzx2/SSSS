@@ -20,7 +20,8 @@
       --green-soft:#dff5ef;
       --red:#df1d2d;
       --border:#d6dee8;
-      --pink:#d49abb;
+      --pink:#f8d7da;
+      --grey:#dcdcdc;
       --shadow:0 12px 30px rgba(14,30,55,.10);
       --radius:18px;
     }
@@ -51,6 +52,7 @@
     .address{font-size:18px; line-height:1.25;}
     .est{font-size:14px; border-bottom:2px dotted #777; display:inline-block; min-width:500px; padding-bottom:2px;}
     .period{font-size:20px; border-top:2px dotted #777; border-bottom:2px dotted #777; display:inline-block; padding:1px 20px; margin-top:6px;}
+    .month-title{color:var(--red); font-size:20px; font-weight:800; margin-top:8px; text-transform:uppercase;}
 
     .notice-wrap{
       background:#fff;
@@ -133,7 +135,8 @@
     th{background:#f4f5f7; font-weight:800;}
     td.name{text-align:left; font-weight:800; white-space:nowrap;}
     td.status{font-weight:800; white-space:nowrap;}
-    .pink{background:var(--pink)!important;}
+    .pink-bg{background:var(--pink)!important;}
+    .grey-bg{background:var(--grey)!important;}
     tr.selected-row td{background:var(--green-soft)!important; color:#052c26; border-top:2px solid var(--green); border-bottom:2px solid var(--green);}
     tr.selected-row td:first-child{border-left:3px solid var(--green);}
     tr.selected-row td:last-child{border-right:3px solid var(--green);}
@@ -225,11 +228,12 @@
       <div class="title">স্বপ্ন ছোঁয়া সমবায় সমিতি</div>
       <div class="address">মডেরহাট, ডামুড্যা, শরীয়তপুর</div>
       <div class="est">স্থাপিতঃ ২০২২</div><br>
-      <div class="period">2022 to 19 May 2026 (Include Month: May 26)</div>
+      <div class="period">2022 to 29 June 2026 (Include Month: June 26)</div>
+      <div class="month-title">JUNE 2026</div>
     </header>
 
     <section class="notice-wrap" aria-label="notice">
-      <div class="notice-track">(এখনে 2026 JAN, FEB, MARCH, APRIL) জরিমানার টাকা মূল টাকা থেকে কাটা হয়েছে।</div>
+      <div class="notice-track">এখানে জুন মাস পর্যন্ত হিসাব দেওয়া হয়েছে, মে মাসের জরিমানা মূল টাকা থেকে কাটা হয়নি।</div>
     </section>
 
     <section class="controls">
@@ -245,8 +249,9 @@
           <thead>
             <tr>
               <th colspan="4"></th>
-              <th colspan="5">জরিমানা JAN, FEB, MARCH, APRIL (Paid)</th>
-              <th>Unpaid</th>
+              <th colspan="4">জরিমানা JAN, FEB, MARCH, APRIL(Paid)</th>
+              <th class="pink-bg">Unpaid</th>
+              <th class="pink-bg">Unpaid</th>
               <th>PAID</th>
             </tr>
             <tr>
@@ -254,12 +259,12 @@
               <th>নাম</th>
               <th>বকেয়া/বেশি</th>
               <th>জমা</th>
-              <th>JAN</th>
               <th>FEB</th>
               <th>MARCH</th>
-              <th class="pink">APRIL</th>
-              <th>মোট</th>
-              <th>জরিমানা<br>2025</th>
+              <th>APRIL</th>
+              <th class="grey-bg">মোট</th>
+              <th class="pink-bg">MAY</th>
+              <th class="pink-bg">জরিমানা<br>2025</th>
               <th>জরিমানা<br>(2022-24)</th>
             </tr>
           </thead>
@@ -276,7 +281,7 @@
             <div class="capture-head">
               <div class="org">স্বপ্ন ছোঁয়া সমবায় সমিতি</div>
               <div class="addr">মডেরহাট, ডামুড্যা, শরীয়তপুর</div>
-              <div class="period" style="font-size:14px;margin-top:8px;">2022 to 19 May 2026 (Include Month: May 26)</div>
+              <div class="period" style="font-size:14px;margin-top:8px;">2022 to 29 June 2026 (Include Month: June 26)</div>
               <div class="pname" id="personalName"></div>
             </div>
 
@@ -284,17 +289,17 @@
               <div class="detail-item"><label>সদস্য নং</label><strong id="pNo"></strong></div>
               <div class="detail-item"><label>জমা</label><strong id="pDeposit"></strong></div>
               <div class="detail-item"><label>বকেয়া/বেশি</label><strong id="pBalance"></strong></div>
-              <div class="detail-item"><label>জরিমানা 2025</label><strong id="pFine2025"></strong></div>
-              <div class="detail-item"><label>জরিমানা (2022-24)</label><strong id="pOldFine"></strong></div>
-              <div class="detail-item full"><label>JAN-APRIL মোট জরিমানা</label><strong id="pTotal"></strong></div>
+              <div class="detail-item"><label>জরিমানা 2025 (Unpaid)</label><strong id="pFine2025"></strong></div>
+              <div class="detail-item"><label>জরিমানা 2022-24 (Paid)</label><strong id="pOldFine"></strong></div>
+              <div class="detail-item full"><label>মোট জরিমানা 2026(Paid)</label><strong id="pTotal"></strong></div>
             </div>
 
             <div class="fine-row">
-              <div class="fine-box"><span>JAN</span><b id="pJan"></b></div>
               <div class="fine-box"><span>FEB</span><b id="pFeb"></b></div>
               <div class="fine-box"><span>MARCH</span><b id="pMar"></b></div>
               <div class="fine-box"><span>APRIL</span><b id="pAprBox"></b></div>
-              <div class="fine-box"><span>মোট</span><b id="pTotal2"></b></div>
+              <div class="fine-box"><span>MAY</span><b id="pMayBox"></b></div>
+              <div class="fine-box" style="background:var(--grey);"><span>মোট (Paid)</span><b id="pTotal2"></b></div>
               <div class="fine-box"><span>স্ট্যাটাস</span><b id="pStatus"></b></div>
             </div>
           </div>
@@ -309,47 +314,46 @@
 
   <script>
     const members = [
-      {no:1, name:'মোঃ ইয়াছিন মিয়া', balance:'', deposit:65000, jan:0, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:300},
-      {no:2, name:'মোঃ আল-আমিন মাদবর', balance:'', deposit:65000, jan:0, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:0},
-      {no:3, name:'মোঃ ফরহাদ হোসেন', balance:'বকেয়া: 2000', deposit:63000, jan:0, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:200},
-      {no:5, name:'মোঃ রুবেল মিয়া', balance:'বকেয়া: 2000', deposit:63000, jan:0, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:0},
-      {no:6, name:'মোঃ ওমর ফারুক', balance:'বকেয়া: 2000', deposit:63000, jan:0, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:600},
-      {no:7, name:'এনামুল হক (ফয়সাল)', balance:'বকেয়া: 2000', deposit:63000, jan:0, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:300},
-      {no:8, name:'আরমান উদ্দিন ইয়ামিন', balance:'', deposit:65000, jan:0, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:0},
-      {no:9, name:'মোঃ আলি আকবর মাদবর', balance:'বকেয়া: 2000', deposit:63000, jan:0, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:100},
-      {no:10, name:'শরিফুল ইসলাম (শরিফ)', balance:'বকেয়া: 2200', deposit:62800, jan:200, feb:0, mar:0, april:200, fine2025:'প্রক্রিয়াধীন', oldFine:400},
-      {no:11, name:'মোঃ আলি- আজম মাদবর', balance:'বকেয়া: 1600', deposit:63400, jan:0, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:500},
-      {no:13, name:'মোঃ রাকিব মাদবর', balance:'বকেয়া: 2000', deposit:63000, jan:0, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:500},
-      {no:14, name:'মোঃ দাদান হাওলাদার', balance:'বকেয়া: 4600', deposit:60400, jan:200, feb:200, mar:0, april:200, fine2025:'প্রক্রিয়াধীন', oldFine:1400},
-      {no:16, name:'মোঃ সফিক মাদবর', balance:'', deposit:65000, jan:0, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:0},
-      {no:17, name:'মোঃ শাহিন মাদবর', balance:'', deposit:65000, jan:0, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:0},
-      {no:18, name:'মোঃ আলমগির হাওলাদার', balance:'বকেয়া: 4600', deposit:60400, jan:200, feb:200, mar:0, april:200, fine2025:'প্রক্রিয়াধীন', oldFine:500},
-      {no:19, name:'মোঃ আওলাদ মালত', balance:'বেশি: 5000', deposit:70000, jan:0, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:0},
-      {no:20, name:'মোঃ মানিক বেপারী', balance:'', deposit:65000, jan:0, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:1600},
-      {no:21, name:'মোঃ সোহেল আরমান', balance:'বকেয়া: 2000', deposit:63000, jan:0, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:0},
-      {no:22, name:'রানা মোল্লা (রুবেল)', balance:'বকেয়া: 2400', deposit:62600, jan:200, feb:0, mar:200, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:100},
-      {no:23, name:'চাঁন মিয়া', balance:'বকেয়া: 2000', deposit:63000, jan:0, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:200},
-      {no:24, name:'মোঃ আনোয়ার হোসেন', balance:'বকেয়া: 2200', deposit:62800, jan:200, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:100},
-      {no:25, name:'মোঃ নাজমুল হক', balance:'বেশি: 4000', deposit:69000, jan:200, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:0},
-      {no:26, name:'রুবেল হাওলাদার', balance:'বকেয়া: 4600', deposit:60400, jan:200, feb:200, mar:0, april:200, fine2025:'প্রক্রিয়াধীন', oldFine:300},
-      {no:27, name:'আজাদ মাদবর', balance:'বকেয়া: 400', deposit:64600, jan:200, feb:200, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:0},
-      {no:28, name:'শরীয়তউল্লাহ', balance:'বকেয়া: 4200', deposit:60800, jan:0, feb:0, mar:200, april:200, fine2025:'প্রক্রিয়াধীন', oldFine:200},
-      {no:29, name:'আজিজুল', balance:'', deposit:65000, jan:0, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:0},
-      {no:30, name:'সোহেল', balance:'বেশি: 1000', deposit:66000, jan:200, feb:200, mar:200, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:800},
-      {no:31, name:'রায়হান', balance:'বকেয়া: 2600', deposit:62400, jan:0, feb:0, mar:0, april: "not add(200)", fine2025:'প্রক্রিয়াধীন', oldFine:1300},
-      {no:32, name:'সপন', balance:'বকেয়া: 600', deposit:64400, jan:200, feb:200, mar:200, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:900},
-      {no:34, name:'আনিস', balance:'বেশি: 2000', deposit:67000, jan:0, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:900},
-      {no:35, name:'মোকলেস', balance:'', deposit:65000, jan:0, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:1800},
-      {no:36, name:'ইউসুফ', balance:'বকেয়া: 6600', deposit:58400, jan:200, feb:200, mar:200, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:1800},
-      {no:37, name:'বাবলু হাঃ', balance:'বেশি: 1800', deposit:66800, jan:0, feb:200, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:0},
-      {no:38, name:'পারবেজ মাঃ', balance:'বেশি: 5800', deposit:70800, jan:200, feb:0, mar:0, april:200, fine2025:'প্রক্রিয়াধীন', oldFine:0},
-      {no:39, name:'আবদুল্লাহ আয়ান', balance:'বকেয়া: 2000', deposit:63000, jan:0, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:0},
-      {no:40, name:'আব্দুল্লাহ জিহাদ', balance:'বেশি: 2000', deposit:67000, jan:0, feb:0, mar:0, april:0, fine2025:'প্রক্রিয়াধীন', oldFine:0},
-      {no:41, name:'জহির', balance:'বকেয়া: 6400', deposit:58600, jan:0, feb:0, mar:200, april:200, fine2025:'প্রক্রিয়াধীন', oldFine:0}
+      {no:1, name:'মোঃ ইয়াছিন মিয়া', balance:'বেশি: 12000', deposit:79000, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'300'},
+      {no:2, name:'মোঃ আল-আমিন মাদবর', balance:'বকেয়া: 2000', deposit:65000, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'0'},
+      {no:3, name:'মোঃ ফরহাদ হোসেন', balance:'বকেয়া: 2000', deposit:65000, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'200'},
+      {no:5, name:'মোঃ রুবেল মিয়া', balance:'বকেয়া: 2000', deposit:65000, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'0'},
+      {no:6, name:'মোঃ ওমর ফারুক', balance:'বকেয়া: 2000', deposit:65000, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'600'},
+      {no:7, name:'এনামুল হক(ফয়সাল)', balance:'বকেয়া: 2000', deposit:65000, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'300'},
+      {no:8, name:'আরমান উদ্দিন ইয়ামিন', balance:'বকেয়া: 2000', deposit:65000, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'0'},
+      {no:9, name:'মোঃ আলি আকবর মাদবর', balance:'বকেয়া: 2000', deposit:65000, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'100'},
+      {no:10, name:'শরিফুল ইসলাম (শরিফ)', balance:'বকেয়া: 4200', deposit:62800, feb:'', mar:'', april:'', totalPaid:'200', may:'200', fine2025:'প্রক্রিয়াধীন', oldFine:'400'},
+      {no:11, name:'মোঃ আলি- আজম মাদবর', balance:'বকেয়া: 1600', deposit:65400, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'500'},
+      {no:13, name:'মোঃ রাকিব মাদবর', balance:'বকেয়া: 2000', deposit:65000, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'500'},
+      {no:14, name:'মোঃ দাদান হাওলাদার', balance:'বকেয়া: 6600', deposit:60400, feb:'200', mar:'', april:'200', totalPaid:'600', may:'200', fine2025:'প্রক্রিয়াধীন', oldFine:'1400'},
+      {no:16, name:'মোঃ সফিক মাদবর', balance:'বকেয়া: 2000', deposit:65000, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'0'},
+      {no:17, name:'মোঃ শাহিন মাদবর', balance:'বকেয়া: 2000', deposit:65000, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'0'},
+      {no:18, name:'মোঃ আলমগির হাওলাদার', balance:'বেশি: 3900', deposit:70900, feb:'200', mar:'', april:'200', totalPaid:'600', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'500'},
+      {no:19, name:'মোঃ আওলাদ মালত', balance:'বেশি: 5000', deposit:72000, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'0'},
+      {no:20, name:'মোঃ মানিক বেপারী', balance:'বকেয়া: 2000', deposit:65000, feb:'200', mar:'200', april:'', totalPaid:'400', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'1600'},
+      {no:21, name:'মোঃ সোহেল আরমান', balance:'বকেয়া: 2000', deposit:65000, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'0'},
+      {no:22, name:'রানা মোল্লা(রুবেল )', balance:'বকেয়া: 2000', deposit:65000, feb:'', mar:'200', april:'', totalPaid:'400', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'100'},
+      {no:23, name:'চাঁন মিয়া', balance:'বেশি: 2000', deposit:69000, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'200'},
+      {no:24, name:'মোঃ আনোয়ার হোসেন', balance:'বকেয়া: 2200', deposit:64800, feb:'200', mar:'', april:'', totalPaid:'200', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'100'},
+      {no:25, name:'মোঃ নাজমুল হক', balance:'বেশি: 2000', deposit:69000, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'0'},
+      {no:26, name:'রুবেল হাওলাদার', balance:'বকেয়া: 600', deposit:66400, feb:'200', mar:'', april:'200', totalPaid:'600', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'300'},
+      {no:27, name:'আজাদ মাদবর', balance:'বকেয়া: 2400', deposit:64600, feb:'200', mar:'', april:'', totalPaid:'400', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'0'},
+      {no:28, name:'শরীয়তউল্লাহ', balance:'বকেয়া: 4200', deposit:62800, feb:'', mar:'', april:'200', totalPaid:'200', may:'200', fine2025:'প্রক্রিয়াধীন', oldFine:'200'},
+      {no:29, name:'আজিজুল', balance:'', deposit:67000, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'0'},
+      {no:30, name:'সোহেল', balance:'বেশি: 10000', deposit:77000, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'800'},
+      {no:31, name:'রায়হান', balance:'বকেয়া: 2600', deposit:64400, feb:'200', mar:'200', april:'', totalPaid:'600', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'1300'},
+      {no:32, name:'সপন', balance:'বেশি: 1400', deposit:68400, feb:'200', mar:'200', april:'', totalPaid:'600', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'900'},
+      {no:34, name:'আনিস', balance:'', deposit:67000, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'900'},
+      {no:35, name:'মোকলেস', balance:'', deposit:67000, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'1800'},
+      {no:36, name:'ইউসুফ', balance:'বকেয়া: 2600', deposit:64400, feb:'200', mar:'200', april:'', totalPaid:'600', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:'1800'},
+      {no:37, name:'বাবলু হাঃ', balance:'বকেয়া: 200', deposit:66800, feb:'200', mar:'', april:'', totalPaid:'200', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:''},
+      {no:38, name:'পারবেজ মাঃ', balance:'বেশি: 3800', deposit:70800, feb:'', mar:'', april:'', totalPaid:'400', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:''},
+      {no:39, name:'আবদুল্লাহ আয়ান', balance:'বকেয়া: 2000', deposit:65000, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:''},
+      {no:40, name:'আব্দুল্লাহ জিহাদ', balance:'', deposit:67000, feb:'', mar:'', april:'', totalPaid:'', may:'', fine2025:'প্রক্রিয়াধীন', oldFine:''},
+      {no:41, name:'জহির', balance:'বকেয়া: 8400', deposit:58600, feb:'', mar:'200', april:'200', totalPaid:'400', may:'200', fine2025:'প্রক্রিয়াধীন', oldFine:''}
     ];
 
     const $ = id => document.getElementById(id);
-    const totalFine = m => Number(m.jan||0) + Number(m.feb||0) + Number(m.mar||0) + Number(m.april||0);
     const fmt = v => (v === '' || v === null || v === undefined || v === 0) ? '' : String(v);
 
     function buildSelect(){
@@ -357,14 +361,19 @@
     }
 
     function buildStats(){
-      const totalDeposit = members.reduce((s,m)=>s+Number(m.deposit||0),0);
-      const fines = members.reduce((s,m)=>s+totalFine(m),0);
-      const dueCount = members.filter(m => m.balance.includes('বকেয়া')).length;
+      let totalPaidAll = 0;
+      let totalDueMembers = 0;
+      
+      members.forEach(m => {
+        totalPaidAll += Number(m.totalPaid || 0);
+        if(m.balance.includes('বকেয়া')) totalDueMembers++;
+      });
+
       $('stats').innerHTML = `
         <div class="stat"><span>মোট সদস্য</span><b>${members.length}</b></div>
-        <div class="stat"><span>মঅতিরিক্ত টাকা</span><b>5000(all)</b></div>
-        <div class="stat"><span>JAN-APRIL মোট জরিমানা</span><b>${fines}</b></div>
-        <div class="stat"><span>বকেয়া সদস্য</span><b>22</b></div>
+        <div class="stat"><span>অতিরিক্ত টাকা</span><b>5000(all)</b></div>
+        <div class="stat"><span>মোট জরিমানা (Paid)</span><b>Count...</b></div>
+        <div class="stat"><span>বকেয়া সদস্য</span><b>${totalDueMembers}</b></div>
       `;
     }
 
@@ -375,12 +384,12 @@
           <td class="name">${m.name}</td>
           <td class="status">${m.balance}</td>
           <td>${m.deposit}</td>
-          <td>${fmt(m.jan)}</td>
           <td>${fmt(m.feb)}</td>
           <td>${fmt(m.mar)}</td>
-          <td class="pink"><b>${fmt(m.april)}</b></td>
-          <td><b>${totalFine(m) || ''}</b></td>
-          <td>${m.fine2025}</td>
+          <td>${fmt(m.april)}</td>
+          <td class="grey-bg"><b>${fmt(m.totalPaid)}</b></td>
+          <td class="pink-bg"><b>${fmt(m.may)}</b></td>
+          <td class="pink-bg">${m.fine2025}</td>
           <td><b>${fmt(m.oldFine)}</b></td>
         </tr>
       `).join('');
@@ -393,11 +402,11 @@
           <div class="m-grid">
             <div>বকেয়া/বেশি<b>${m.balance || '-'}</b></div>
             <div>জমা<b>${m.deposit}</b></div>
-            <div>JAN<b>${fmt(m.jan) || 0}</b></div>
             <div>FEB<b>${fmt(m.feb) || 0}</b></div>
             <div>MARCH<b>${fmt(m.mar) || 0}</b></div>
             <div>APRIL<b>${fmt(m.april) || 0}</b></div>
-            <div>মোট<b>${totalFine(m)}</b></div>
+            <div>MAY (Unpaid)<b>${fmt(m.may) || 0}</b></div>
+            <div>মোট (Paid)<b>${fmt(m.totalPaid) || 0}</b></div>
             <div>2022-24 জরিমানা<b>${fmt(m.oldFine) || '-'}</b></div>
           </div>
         </article>
@@ -430,13 +439,13 @@
       $('pFine2025').textContent = m.fine2025 || '-';
       $('pOldFine').textContent = fmt(m.oldFine) || '-';
       
-      $('pJan').textContent = fmt(m.jan) || 0;
       $('pFeb').textContent = fmt(m.feb) || 0;
       $('pMar').textContent = fmt(m.mar) || 0;
       $('pAprBox').textContent = fmt(m.april) || 0;
+      $('pMayBox').textContent = fmt(m.may) || 0;
       
-      $('pTotal').textContent = totalFine(m);
-      $('pTotal2').textContent = totalFine(m);
+      $('pTotal').textContent = fmt(m.totalPaid) || 0;
+      $('pTotal2').textContent = fmt(m.totalPaid) || 0;
       $('pStatus').textContent = m.fine2025 || '-';
       highlightSelected();
     }
